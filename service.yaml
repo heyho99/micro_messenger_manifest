@@ -1,0 +1,32 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: microapp-messenger-message-1002-v2
+  namespace: cicd1002
+  labels:
+    app: microapp-messenger-message-1002-v2
+    app.kubernetes.io/component: microapp-messenger-message-1002-v2
+    app.kubernetes.io/instance: microapp-messenger-message-1002-v2
+    app.kubernetes.io/name: microapp-messenger-message-1002-v2
+    app.kubernetes.io/part-of: Triggers
+      
+spec:
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: 5001-tcp
+      protocol: TCP
+      port: 5001  # serviceがリッスンするポート
+      targetPort: 5001  # deploymentへの転送先ポート
+  # サービスのトラフィックがクラスタ内の全てのノードに分散されるかどうかを指定する
+  internalTrafficPolicy: Cluster
+  type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  
+  # ここで指定したlabelが一致するpodにトラフィックが転送される
+  # 必要ラベルがdeploymentについていなくてもpodに自動的につくっぽい
+  selector:
+    app: microapp-messenger-message-1002-v2
+    deployment: microapp-messenger-message-1002-v2
+

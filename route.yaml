@@ -1,0 +1,28 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: microapp-messenger-message-1002-v2
+  namespace: cicd1002
+
+  labels:
+    app: microapp-messenger-message-1002-v2
+    app.kubernetes.io/component: microapp-messenger-message-1002-v2
+    app.kubernetes.io/instance: microapp-messenger-message-1002-v2
+    app.kubernetes.io/name: microapp-messenger-message-1002-v2
+    app.kubernetes.io/part-of: Triggers
+
+spec:
+  host: microapp-messenger-message-1002-v2-cicd1002.apps.cluster-01.hello-openshift.co.jp
+
+  # 公開するServiceを指定する
+  to:
+    kind: Service
+    name: microapp-messenger-message-1002-v2
+    weight: 100
+  port:
+    targetPort: 5001-tcp  # ServiceのtargetPortと一致させる
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+

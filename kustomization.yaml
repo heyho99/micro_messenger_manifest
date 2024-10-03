@@ -1,0 +1,10 @@
+namePrefix: ''
+resources:
+  - deployment.yaml
+  - service.yaml
+  - route.yaml
+
+# imageの更新情報を記入し、Argo CDを起動させる
+images:
+  - name: image-registry.openshift-image-registry.svc:5000/tekton-practice/microapp-messenger-message-git@sha256
+    newTag: '0eea8f7c6f1c584f2f02d7c00bd11a50577c2a1f5ad0e47f670de111c34a8614'

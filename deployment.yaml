@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microapp-messenger-message-1002-v2
+  labels:
+    app: microapp-messenger-message-1002-v2
+    app.kubernetes.io/component: microapp-messenger-message-1002-v2
+    app.kubernetes.io/instance: microapp-messenger-message-1002-v2
+    app.kubernetes.io/name: microapp-messenger-message-1002-v2
+    app.kubernetes.io/part-of: Triggers
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microapp-messenger-message-1002-v2
+  template:
+    metadata:
+      labels:
+        app: microapp-messenger-message-1002-v2
+        deployment: microapp-messenger-message-1002-v2
+    spec:
+      containers:
+      - name: myapp
+        image: 'image-registry.openshift-image-registry.svc:5000/tekton-practice/microapp-messenger-message-git@sha256:0eea8f7c6f1c584f2f02d7c00bd11a50577c2a1f5ad0e47f670de111c34a8614'
